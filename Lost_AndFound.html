@@ -1,0 +1,123 @@
+﻿<!DOCTYPE>
+<link rel="stylesheet" href="./exx.css">
+<style>
+a { text-decoration:none }
+.bgimg {
+    font-size:45px;
+    font-weight: bolder;
+    border: 0;
+    padding: 0;
+    opacity: 0.8;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/ales-krivec-38565-unsplash.jpg);
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+div { text-align: center; }
+        table{
+                border-top: 1px solid #444444;
+                border-collapse: collapse;
+        }
+        tr{
+                border-bottom: 1px solid #444444;
+                padding: 10px;
+        }
+        td{
+                border-bottom: 1px solid #efefef;
+                padding: 10px;
+        }
+        table .even{
+                background: #efefef;
+        }
+        .text{
+                text-align:center;
+                padding-top:20px;
+                color:#000000
+        }
+        .text:hover{
+                text-decoration: underline;
+        }
+        a:link {color : #57A0EE; text-decoration:none;}
+        a:hover { text-decoration : underline;}
+
+</style>
+<html>
+<div id="header">
+<br>
+<div>
+ <a href="index.html"><img src="bus1671.png" aligan="center" />
+</div>
+  <nav>
+  <br>
+  <a href="bussearchwhat.html">Search Bus</a>
+  <a href="busmemo_insert.html">Add BusMemo</a>
+  <a href="EmergencyFacility.html">Emergency Facility</a>
+  <div id="indicator"></div>
+  </nav>
+  </div>  
+<div class="bgimg">
+<br><br><br><br>
+<img src="main_button_03.PNG"/><br>
+Lost-And-Found
+</div>
+   <body>
+     <div id="section2">
+       <?php
+                $connect = mysqli_connect('localhost', 'root', 'root', 'app') or die ("connect fail");
+                $query ="select * from lost order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+ 
+        ?>
+        <h2 align=center>분실물 신고</h2>
+        <br><br><br>
+        <table align = center>
+        <thead align = "center">
+        <tr>
+        <td width = "50" align="center">번호</td>
+        <td width = "500" align = "center">제목</td>
+        <td width = "100" align = "center">작성자</td>
+        <td width = "200" align = "center">날짜</td>
+        <td width = "50" align = "center">조회수</td>
+        </tr>
+        </thead>
+ 
+        <tbody>
+        <?php
+                while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                        if($total%2==0){
+        ?>                      <tr class = "even">
+                        <?php   }
+                        else{
+        ?>                      <tr>
+                        <?php } ?>
+                <td width = "50" align = "center"><?php echo $total?></td>
+                <td width = "500" align = "center">
+                <a href = "lostboard.php?number=<?php echo $rows['number']?>">
+                <?php echo $rows['title']?></td>
+                  <td width = "100" align = "center"><?php echo $rows['id']?></td>
+                <td width = "200" align = "center"><?php echo $rows['date']?></td>
+                <td width = "50" align = "center"><?php echo $rows['hit']?></td>
+                </tr>
+        <?php
+                $total--;
+                }
+        ?>
+        </tbody>
+        </table>
+ <div class = text>
+        <font style="cursor: hand"onClick="location.href='Lostandfound.html'">글쓰기</font>
+        </div>
+
+    </div>
+     <h6 style=" text-align: right"><a href="#" class="scrollup" ><img src="/image/top.PNG"  alt="페이지 상단으로 이동 " />'</a></h6>        
+    <div id="footer">
+      <hr>
+      <h4 style = " text-align: center">Adress : 경기도 수원시 장안구 송원로 24번길 17 송죽동 380-10 1층 (16307)</h4>
+      <h4 style = " text-align: center">Tel : 031)253-7723&nbsp; Fax : 031)246-7721 &nbsp;평일 09:00 ~ 18:00 점심 12:00~13:00
+      <h4 style = " text-align: right">copyrightⓒEunjung. All Rights reserved</h4>
+    </div>
+</body>
+
+</html>

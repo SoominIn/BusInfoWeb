@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <form enctype="multipart/form-data" action="1.php" method="post">
+    <!--
+    만약 업로드 할 파일의 크기가 300kb를 넘는다면 업로드 에러가 발생한다.
+    MAX_FILE_SIZE 태그는 반드시 input type='file' 태그 위에 선언해야 한다.
+    -->
+      <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+      <input type="file" name="imgfile" />
+      <input type="submit" value="upload" />
+  </form>
+</body>
+</html>
